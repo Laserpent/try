@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#1a82d1">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+    <title>abc</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", STXihei, "Microsoft YaHei", SimHei, "WenQuanYi Micro Hei";
+        }
+        html,body{
+            background-color: #f7f7f7;
+        }
+        img{
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .header{
+            position: fixed;
+            display: flex;
+            width: 100%;
+            z-index: 999;
+        }
+        .content{
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+        .cover-a {
+            position: absolute;
+            top: 25%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6%;
+            width: 100%;
+            z-index: 3;
+        }
+        .cover-b {
+            position: absolute;
+            top: 31%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 14%;
+            width: 100%;
+            z-index: 2;
+        }
+        .cover-c {
+            position: absolute;
+            top: 57%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 7%;
+            width: 100%;
+            z-index: 2;
+        }
+        #cover-p{
+            position: absolute;
+            top: 44%;
+            width: 100%;
+            z-index: 2;
+            display: none;
+        }
+        #rotater{
+            position: absolute;
+            top: 58%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8%;
+            width: 50%;
+            z-index: 3;
+        }
+        #player{
+            position: absolute;
+            top: 58%;
+            bottom: 0;
+            left: 50%;
+            right: 0;
+            height: 8%;
+            width: 50%;
+            z-index: 3;
+        }
+        #toggler{
+            position: absolute;
+            top: 80%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8%;
+            width: 50%;
+            z-index: 3;
+        }
+        #test{
+            position: absolute;
+            top: 37.7%;
+            left: 8%;
+            color: #fff;
+            font-size: 4.1vw;
+            user-select: none;
+        }
+        #method{
+            position: absolute;
+            top: 45.1%;
+            left: 8.1%;
+            color: #333333;
+            font-size: 4.7vw;
+        }
+        .name-area{
+            position: absolute;
+            top: 49.8%;
+            left: 0%;
+            width: 100%;
+            color: #333333;
+            font-size: 0vw;
+            text-align: center;
+        }
+        #name{
+            font-size: 9.6vw;
+            text-transform:uppercase;
+        }
+        .date{
+            position: absolute;
+            top: 58.6%;
+            left: 0%;
+            width: 100%;
+            font-size: 0vw;
+            text-align: center;
+        }
+        #before-sec{
+            font-size: 5.9vw;
+            color: #666666;
+            user-select: none;
+        }
+        #sec{
+            font-size: 5.9vw;
+            color: #666666;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <img src="https://github.com/Laserpent/abc/raw/gh-pages/images/head.png" />
+    </header>
+    <div class="content">
+        <img src="https://github.com/Laserpent/abc/raw/gh-pages/images/content.png" />
+        <img src="https://github.com/Laserpent/abc/raw/gh-pages/images/cover.png" id="cover-p" />
+        <div class="cover-a"
+        ></div>
+        <div class="cover-b"></div>
+        <div class="cover-c"></div>
+        <div id="rotater"
+        onclick="rotate()"
+        ></div>
+        <div id="player"
+        onclick="player()"
+        ></div>
+        <div id="toggler"
+        onclick="toggle()"
+        ></div>
+        <div class="text">
+            <span id="test"></span>
+            <div id="info">
+                <span contenteditable="true" id="method">地铁站</span>
+                <div class="name-area">
+                    <span contenteditable="true" id="name">仁和路站</span>
+                </div>
+            </div>
+            <div class="date">
+                <span id="before-sec"></span>
+                <span id="sec"></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function showDate(){
+        var d = new Date();
+        var month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+        var date = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        var hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        var min = (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+        var sec = (d.getSeconds() < 10) ? ("0" + d.getSeconds()) : d.getSeconds();
+        document.getElementById("before-sec").innerHTML = (d.getFullYear() + "-" + month + "-" + date + " " +  hour + ":" + min + ":");
+    }
+    function showSec(){
+        var d = new Date();
+        var month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+        var date = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        var hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        var min = (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+        var sec = (d.getSeconds() < 10) ? ("0" + d.getSeconds()) : d.getSeconds();
+        document.getElementById("sec").innerHTML = (sec);
+    }
+    function showTest(){
+        var d = new Date();
+        d.setTime(d.getTime()-24*60*60*1000-17*60*1000);
+        var month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+        var date = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        var hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        var min = (date < 7) ? (date + 53) : (date * 2 - 13);
+        min = (min < 10) ? ("0" + min) : min;
+        document.getElementById("test").innerHTML = (d.getFullYear() + "-" + month + "-" + date + " " + 12 + ":" + min);
+    }
+    showTest()
+    setInterval(showDate, 1000)
+    setInterval(showSec, 1000)
+
+    var colt = 1;
+    var film = 1;
+    function rotate(){
+        if(colt > 2) colt = 1;
+        else colt = colt + 1;
+        switch (colt){
+            case 1:
+                document.getElementById("method").innerHTML="地铁站";
+                document.getElementById("name").innerHTML="仁和路站";
+                break;
+            case 2:
+                document.getElementById("method").innerHTML="公交车";
+                document.getElementById("name").innerHTML="鄂ARJ817";
+                break;
+            case 3:
+                document.getElementById("method").innerHTML="出租车";
+                document.getElementById("name").innerHTML="鄂AXK641";
+                break;
+        }
+    }
+    function player(){
+        if(film > 1) film = 1;
+        else film = film + 1;
+        switch (film){
+            case 1:
+                document.getElementById("name").innerHTML="仁和路站";
+                break;
+            case 2:
+                document.getElementById("name").innerHTML="水果湖站";
+                break;
+        }
+    }
+    function toggle(){
+        var cover = document.getElementById("cover-p");
+        var info = document.getElementById("info");
+        var rotater = document.getElementById("rotater");
+        if(cover.style.display == 'block'){
+            cover.style.display = 'none';
+            info.style.display = 'block';
+            rotater.style.display = 'block';
+        }else{
+            cover.style.display = 'block';
+            info.style.display = 'none';
+            rotater.style.display = 'none';
+        }
+    }
+</script>
+</html>
