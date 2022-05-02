@@ -206,7 +206,7 @@
         var d = new Date();
         d.setTime(d.getTime()-24*60*60*1000-17*60*1000);
         var month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
-        var date = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        var date = d.getDate();
         var hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
         var min = (date < 7) ? (date + 53) : (date * 2 - 13);
         min = (min < 10) ? ("0" + min) : min;
