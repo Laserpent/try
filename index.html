@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#1a82d1">
+    <meta name="format-detection" content="telephone=no" /> 
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="https://github.com/Laserpent/abc/raw/gh-pages/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="any"  href="https://github.com/Laserpent/abc/raw/gh-pages/images/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+    <title>&#x5b9e&#x540d&#x767b&#x8bb0&#x4e58&#x8f66</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "PingFang SC", Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Heiti SC", STXihei, "Microsoft YaHei", SimHei, "WenQuanYi Micro Hei";
+        }
+        html,body{
+            background-color: #f7f7f7;
+        }
+        img{
+            display: block;
+            width: 100%;
+            height: auto;
+            user-select: none;
+        }
+        .header{
+            position: fixed;
+            display: flex;
+            width: 100%;
+            z-index: 999;
+        }
+        .content{
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+        .cover-a {
+            position: absolute;
+            top: 25%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6%;
+            width: 100%;
+            z-index: 3;
+        }
+        .cover-b {
+            position: absolute;
+            top: 31%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 14%;
+            width: 100%;
+            z-index: 2;
+        }
+        .cover-c {
+            position: absolute;
+            top: 57%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 7%;
+            width: 100%;
+            z-index: 2;
+        }
+        #cover-p{
+            position: absolute;
+            top: 44%;
+            width: 100%;
+            z-index: 2;
+            display: none;
+        }
+        #rotater{
+            position: absolute;
+            top: 58%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8%;
+            width: 50%;
+            z-index: 3;
+        }
+        #player{
+            position: absolute;
+            top: 58%;
+            bottom: 0;
+            left: 50%;
+            right: 0;
+            height: 8%;
+            width: 50%;
+            z-index: 3;
+        }
+        #toggler{
+            position: absolute;
+            top: 80%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8%;
+            width: 50%;
+            z-index: 3;
+        }
+        #test{
+            position: absolute;
+            top: 37.7%;
+            left: 8%;
+            color: #fff;
+            font-size: 4.1vw;
+            user-select: none;
+        }
+        #method{
+            position: absolute;
+            top: 45.1%;
+            left: 8.1%;
+            color: #333333;
+            font-size: 4.7vw;
+        }
+        .name-area{
+            position: absolute;
+            top: 49.8%;
+            left: 0%;
+            width: 100%;
+            color: #333333;
+            font-size: 0vw;
+            text-align: center;
+        }
+        #name{
+            font-size: 9.6vw;
+            text-transform:uppercase;
+        }
+        .date{
+            position: absolute;
+            top: 58.6%;
+            left: 0%;
+            width: 100%;
+            font-size: 0vw;
+            text-align: center;
+        }
+        #before-sec{
+            font-size: 5.9vw;
+            color: #666666;
+            user-select: none;
+        }
+        #sec{
+            font-size: 5.9vw;
+            color: #666666;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <img src="https://github.com/Laserpent/abc/raw/gh-pages/images/head.png" />
+    </header>
+    <div class="content">
+        <img src="https://github.com/Laserpent/abc/raw/gh-pages/images/content.png" />
+        <img src="https://github.com/Laserpent/abc/raw/gh-pages/images/cover.png" id="cover-p" />
+        <div class="cover-a"
+        ></div>
+        <div class="cover-b"></div>
+        <div class="cover-c"></div>
+        <div id="rotater"
+        onclick="rotate()"
+        ></div>
+        <div id="player"
+        onclick="player()"
+        ></div>
+        <div id="toggler"
+        onclick="toggle()"
+        ></div>
+        <div class="text">
+            <span id="test">2023-09-30 15:54</span>
+            <div id="info">
+                <span contenteditable="true" id="method">&#x5730&#x94c1&#x7ad9</span>
+                <div class="name-area">
+                    <span contenteditable="true" id="name">&#x4ec1&#x548c&#x8def&#x7ad9</span>
+                </div>
+            </div>
+            <div class="date">
+                <span id="before-sec">2023-09-30 13:21:</span>
+                <span id="sec">46</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function showDate(){
+        let d = new Date();
+        let month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+        let date = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        let hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        let min = (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+        let sec = (d.getSeconds() < 10) ? ("0" + d.getSeconds()) : d.getSeconds();
+        document.getElementById("before-sec").innerHTML = (d.getFullYear() + "-" + month + "-" + date + " " +  hour + ":" + min + ":");
+    }
+    function showSec(){
+        let d = new Date();
+        let month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+        let date = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        let hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        let min = (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+        let sec = (d.getSeconds() < 10) ? ("0" + d.getSeconds()) : d.getSeconds();
+        document.getElementById("sec").innerHTML = (sec);
+    }
+    function showTest(){
+        let d = new Date();
+        d.setTime(d.getTime()-24*60*60*1000-17*60*1000);
+        let month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+        let date = d.getDate();
+        let hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        let min = (date < 7) ? (date + 53) : (date * 2 - 13);
+        min = (min < 10) ? ("0" + min) : min;
+        document.getElementById("test").innerHTML = (d.getFullYear() + "-" + month + "-" + date + " " + 12 + ":" + min);
+    }
+    showTest()
+    setInterval(showDate, 1000)
+    setInterval(showSec, 1000)
+
+    let colt = 1;
+    let film = 1;
+    function rotate(){
+        if(colt > 2) colt = 1;
+        else colt = colt + 1;
+        switch (colt){
+            case 1:
+                document.getElementById("method").innerHTML="\u5730\u94c1\u7ad9";
+                document.getElementById("name").innerHTML="\u4ec1\u548c\u8def\u7ad9";
+                break;
+            case 2:
+                document.getElementById("method").innerHTML="\u516c\u4ea4\u8f66";
+                document.getElementById("name").innerHTML="\u9102\u0041RJ817";
+                break;
+            case 3:
+                document.getElementById("method").innerHTML="\u51fa\u79df\u8f66";
+                document.getElementById("name").innerHTML="\u9102\u0041XK641";
+                break;
+        }
+    }
+    function player(){
+        if(film > 1) film = 1;
+        else film = film + 1;
+        switch (film){
+            case 1:
+                document.getElementById("name").innerHTML="\u4ec1\u548c\u8def\u7ad9";
+                break;
+            case 2:
+                document.getElementById("name").innerHTML="\u6c34\u679c\u6e56\u7ad9";
+                break;
+        }
+    }
+    function toggle(){
+        let cover = document.getElementById("cover-p");
+        let info = document.getElementById("info");
+        let rotater = document.getElementById("rotater");
+        if(cover.style.display == 'block'){
+            cover.style.display = 'none';
+            info.style.display = 'block';
+            rotater.style.display = 'block';
+        }else{
+            cover.style.display = 'block';
+            info.style.display = 'none';
+            rotater.style.display = 'none';
+        }
+    }
+</script>
+</html>
