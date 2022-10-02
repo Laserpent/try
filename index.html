@@ -213,10 +213,11 @@
         d.setTime(d.getTime()-24*60*60*1000-17*60*1000);
         let month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
         let date = d.getDate();
-        let hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+        let dateFull = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+        let hour = (d.getHours() < 13) ? "08" : 18;
         let min = (date < 7) ? (date + 53) : (date * 2 - 13);
         min = (min < 10) ? ("0" + min) : min;
-        document.getElementById("test").innerHTML = (d.getFullYear() + "-" + month + "-" + date + " " + 12 + ":" + min);
+        document.getElementById("test").innerHTML = (d.getFullYear() + "-" + month + "-" + dateFull + " " + 12 + ":" + min);
     }
     showTest()
     setInterval(showDate, 1000)
